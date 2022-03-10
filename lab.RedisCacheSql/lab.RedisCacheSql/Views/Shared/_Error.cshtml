@@ -1,0 +1,15 @@
+﻿@model lab.RedisCacheSql.ViewModels.ErrorPageViewModel
+<div id="errorPage">
+    <div class="error-page">
+        <div class="error-content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-@Model.ErrorType" role="alert">
+                        @Model.ErrorMessage
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.error-page -->
+</div>

@@ -1,0 +1,77 @@
+﻿@using GCSideLoading.Web.Models.AccountViewModels
+@model ExternalPlayerLoginConfirmationViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LayoutPlayerLogin.cshtml";
+}
+
+<div class="container-login-left">
+    <div class="wrap-login-left">
+        <form asp-controller="Account" asp-action="ExternalPlayerLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="login-left-title mb-2 text-center">
+                        Register<span class="login-form-icon-green-circle"></span>
+                    </div>
+                    <div class="login-left-desc text-center mb-2">
+                        Associate your @ViewData["LoginProvider"].ToString().ToLower() account.
+                    </div>
+                    <div class="login-left-desc text-center mb-2" style="font-size: 14px;">
+                        You've successfully authenticated with <strong>@ViewData["LoginProvider"]</strong>.
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-input">
+                        @*<label class="input-label">Name</label>*@
+                        <div class="input-group">
+                            <input class="input" data-val="true" data-val-required="User Name is required." name="UserName" placeholder="Enter your user name" value="@Model.UserName">
+                        </div>
+                        <div class="field-validation-valid text-danger" data-valmsg-for="UserName" data-valmsg-replace="true"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <input asp-for="GameId" type="hidden">
+                    <input asp-for="RoleName" type="hidden">
+                    <input asp-for="IsEmail" type="hidden">
+                    <input asp-for="IsMobilePhone" type="hidden">
+
+                    @if (Model.IsEmail)
+                    {
+                        <div class="login-form-input">
+                            @*<label class="input-label">Email</label>*@
+                            <div class="input-group">
+                                <input class="input" data-val="true" data-val-required="Email is required." name="Email" placeholder="Enter your e-mail" value="@Model.Email">
+                            </div>
+                            <div class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></div>
+                        </div>
+                    }
+
+                    @if (Model.IsMobilePhone)
+                    {
+                        <div class="login-form-input">
+                            @*<label class="input-label">Mobile</label>*@
+                            <div class="input-group">
+                                <input class="input" data-val="true" data-val-required="Mobile no is required." name="MobilePhone" placeholder="Enter your mobile no" value="@Model.MobilePhone">
+                            </div>
+                            <div class="field-validation-valid text-danger" data-valmsg-for="MobilePhone" data-valmsg-replace="true"></div>
+                        </div>
+                    }
+
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-input mt-20">
+                        <button type="submit" class="btn btn-green" style="font-size:12px;">
+                            Register
+                        </button>
+                        <a href="@ViewData["ReturnUrl"]" class="btn-login-back">
+                            Back
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

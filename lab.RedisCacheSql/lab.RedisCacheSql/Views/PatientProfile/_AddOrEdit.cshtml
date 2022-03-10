@@ -1,0 +1,61 @@
+﻿@model lab.RedisCacheSql.ViewModels.PatientProfileViewModel
+<div id="modalPatientProfileAddOrEdit" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Patient Profile</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form data-ajax-url="/PatientProfile/SaveAjax"
+                      data-ajax="true"
+                      data-ajax-begin="PatientProfile.ModalPatientProfileBegin();"
+                      data-ajax-complete="PatientProfile.ModalPatientProfileComplete();"
+                      data-ajax-failure="PatientProfile.ModalPatientProfileFailure();"
+                      data-ajax-success="PatientProfile.ModalPatientProfileSuccess(data);"
+                      id="formPatientProfileAddOrEdit"
+                      method="post"
+                      novalidate="novalidate" class="">
+                   
+                    <div class="form-body">
+
+                        <div class="form-group row">
+
+                            <div class="col-6">
+                                <div class="form-group m-0">
+                                    <label asp-for="FirstName" class="control-label required"></label>
+                                    <input class="form-control" asp-for="FirstName" data-val="true" data-val-required="First Name field is required."/>
+                                    <span asp-validation-for="FirstName"></span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group m-0">
+                                    <label asp-for="LastName" class="control-label required"></label>
+                                    <input class="form-control" asp-for="LastName" data-val="true" data-val-required="Last Name field is required." />
+                                    <span asp-validation-for="LastName"></span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                           
+                    </div>
+
+                    <div class="form-actions form-actions-new">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="PatientProfileId" />
+                        <input type="hidden" asp-for="EnableSmsNotification" />
+                        <input type="hidden" asp-for="CreatedBy" />
+                        <input type="hidden" asp-for="CreatedDate" />
+                        <input type="hidden" asp-for="UpdatedBy" />
+                        <input type="hidden" asp-for="UpdatedDate" />
+                        <input type="hidden" asp-for="IsDeactivated" />
+                        <input type="submit" class="btn btn-sm btn-green" value="Save" />
+                        <input type="button" class="btn btn-sm btn-secondary ml-2" data-dismiss="modal" value="Close" />
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

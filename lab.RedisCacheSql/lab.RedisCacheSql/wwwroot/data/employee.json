@@ -1,0 +1,26 @@
+[
+  {
+    "employeeId": 11,
+    "firstName": "Rasel",
+    "lastName": "Ahmmed",
+    "emailAddress": "r@mail.com",
+    "phoneNumber": "01911045573",
+    "presentAddress": "227/4 Manikdee, Dhaka Cantorment, Dhaka-1206."
+  },
+  {
+    "employeeId": 12,
+    "firstName": "John",
+    "lastName": "Mia",
+    "emailAddress": "j@mail.com",
+    "phoneNumber": "01711124578",
+    "presentAddress": "227/4 Manikdee, Dhaka Cantorment, Dhaka-1206."
+  },
+  {
+    "employeeId": 13,
+    "firstName": "David",
+    "lastName": "Fox",
+    "emailAddress": "d@mail.com",
+    "phoneNumber": "01811986532",
+    "presentAddress": "227/4 Manikdee, Dhaka Cantorment, Dhaka-1206."
+  }
+]

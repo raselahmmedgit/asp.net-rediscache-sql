@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Patient Profile";
+}
+
+<div class="row">
+    <div class="col-12">
+        <table id="dataTablesPatientProfile" class="table" style="width:100%"></table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/patientprofile.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        PatientProfile.InitPatientProfile();
+        PatientProfile.LoadDataTables('dataTablesPatientProfile', 100, ("/PatientProfile/GetDataTableAjax"));
+    });
+</script>
+}

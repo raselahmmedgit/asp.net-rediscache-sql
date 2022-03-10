@@ -1,0 +1,99 @@
+@using GCSideLoading.Web.Models.AccountViewModels
+@using Microsoft.AspNetCore.Identity
+@using GCSideLoading.Core.EntityModel
+@model LoginViewModel
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = "Log in";
+    //Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div class="container-login-left">
+    <div class="wrap-login-left">
+        <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="login-form validate-form form-horizontal" role="form">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-left-title mb-40">
+                        Sign In<span class="login-left-title-icon"><span class="login-form-icon-green-circle"></span></span>
+                    </div>
+                    <div class="login-left-desc">
+                        Welcome to the @Configuration["AppConfig:AppCopyrightText"].
+                    </div>
+                    <div class="login-left-desc mb-50">
+                        To continue enter your username and password below.
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-validation-summary">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-input">
+                        <div class="input-group">
+                            <div class="mdc-text-field mdc-text-field--outlined w-100">
+                                <input class="mdc-text-field__input" type="text" data-val="true" data-val-required="Username is required." name="Email" placeholder="Your username">
+                                <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                                    <div class="mdc-notched-outline__leading"></div>
+                                    <div class="mdc-notched-outline__notch">
+                                        <label for="Email" class="mdc-floating-label">Email</label>
+                                    </div>
+                                    <div class="mdc-notched-outline__trailing"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-input">
+                        <div class="input-group">
+                            <div class="mdc-text-field mdc-text-field--outlined w-100">
+                                <input class="mdc-text-field__input" type="password" data-val="true" data-val-required="Password is required." name="Password" placeholder="Your password">
+                                <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                                    <div class="mdc-notched-outline__leading"></div>
+                                    <div class="mdc-notched-outline__notch">
+                                        <label for="Password" class="mdc-floating-label">Password</label>
+                                    </div>
+                                    <div class="mdc-notched-outline__trailing"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-input">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="checkbox-green">
+                                    <input id="ckb1" type="checkbox" name="RememberMe" value="true">
+                                    <label class="control-label" for="ckb1">Keep me signed in</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 text-right">
+                                <a href="@Url.Action("ForgotPassword", "Account", new { Area = "" })" class="txt3">
+                                    Forgot Password?
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-input mt-20">
+                        <button class="btn btn-green mr-20">
+                            Sign In
+                        </button>
+                        @*<a href="@Url.Action("Register", "Account", new { Area = "" })" class="btn btn-dark">
+                                Create Account
+                            </a>*@
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="UserLocalTimeZone" id="UserLocalTimeZone" /><input type="hidden" name="UserLatitude" id="UserLatitude" /><input type="hidden" name="UserLongitude" id="UserLongitude" />
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@using GCSideLoading.Web.Models.AccountViewModels
+@model ExternalLoginConfirmationViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-login-left">
+    <div class="wrap-login-left">
+        <form asp-controller="Account" asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-left-title mb-40">
+                        Association form<span class="login-form-icon-green-circle"></span>
+                    </div>
+                    <div class="login-left-desc">
+                        Associate your @ViewData["LoginProvider"] account.
+                    </div>
+                    <div class="login-left-desc">
+                        You've successfully authenticated with <strong>@ViewData["LoginProvider"]</strong>.
+                    </div>
+                    <div class="login-left-desc mb-50">
+                        Please enter a user name for this site below and click the Register button to finish
+                        logging in.
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-validation-summary">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-input">
+                        @*<label class="input-label">Email</label>*@
+                        <div class="input-group">
+                            <input class="input" data-val="true" data-val-required="Email is required." name="Email" placeholder="Enter your e-mail" value="@Model.Email">
+                        </div>
+                        <div class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-input mt-20">
+                        <button type="submit" class="btn btn-green">
+                            Register
+                        </button>
+                        <a href="@Url.Action("Login", "Account", new { Area = "" })" class="btn-login-back">
+                            Back to sign in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

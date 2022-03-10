@@ -1,0 +1,51 @@
+﻿@using GCSideLoading.Web.Models.AccountViewModels
+@model VerifyCodeViewModel
+@{
+    ViewData["Title"] = "Verify";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-login-left">
+    <div class="wrap-login-left">
+        <form asp-controller="Account" asp-action="VerifyCode" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-left-title mb-40">
+                        Verify<span class="login-form-icon-green-circle"></span>
+                    </div>
+                    <div class="login-left-desc mb-50">
+                        @ViewData["Status"]
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-validation-summary">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="login-form-input">
+                        @*<label class="input-label">Code</label>*@
+                        <div class="input-group">
+                            <input class="input" data-val="true" data-val-required="Code is required." name="Code" placeholder="Code">
+                        </div>
+                        <div class="field-validation-valid text-danger" data-valmsg-for="Code" data-valmsg-replace="true"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="checkbox-green">
+                        <input id="ckb1" type="checkbox" name="RememberBrowser" value="true">
+                        <label class="control-label" for="ckb1">Remember this browser?</label>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <input asp-for="Provider" type="hidden" />
+                    <input asp-for="RememberMe" type="hidden" />
+                    <div class="login-form-input mt-20">
+                        <button type="submit" class="btn btn-green">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
