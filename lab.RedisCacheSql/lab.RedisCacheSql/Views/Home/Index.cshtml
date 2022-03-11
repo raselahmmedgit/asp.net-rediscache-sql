@@ -3,7 +3,77 @@
 }
 
 <div class="row">
-    <div class="col-12">
-        Welcome to Redis Cache World!
+    <div class="col-12 mb-10">
+        <h1>Welcome to Redis Cache World!</h1>
+    </div>
+    <div class="col-3 mb-10">
+        <button id="btnRedisServiceStart" class="btn btn-info"><i class="fa fa-play"></i> Redis Service Start</button>
+    </div>
+    <div class="col-3 mb-10">
+        <button id="btnRedisServiceStop" class="btn btn-danger"><i class="fa fa-stop"></i> Redis Service Stop</button>
+    </div>
+    <div class="col-3 mb-10">
+    </div>
+    <div class="col-3 mb-10">
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+    $(document).ready(function () {
+        
+        $('body').on('click', '#btnRedisServiceStart', function () {
+            $.ajax({
+                type: "GET",
+                url: "/Home/RedisServiceStartAjax",
+                beforeSend: function () {
+                    App.LoaderShow();
+                },
+                success: function (result) {
+                    App.ToastrNotifier(result.error, result.errortype);
+                    App.LoaderHide();
+                },
+                error: function (objAjaxRequest, strError) {
+                    var respText = objAjaxRequest.responseText;
+                    var messageText = respText;
+                    console.log(messageText);
+                    App.ToastrNotifierError(messageText);
+                    App.LoaderHide();
+                },
+                complete: function () {
+                    App.LoaderHide();
+                }
+            });
+
+            return false;
+        });
+
+        $('body').on('click', '#btnRedisServiceStop', function () {
+            $.ajax({
+                type: "GET",
+                url: "/Home/RedisServiceStopAjax",
+                beforeSend: function () {
+                    App.LoaderShow();
+                },
+                success: function (result) {
+                    App.ToastrNotifier(result.error, result.errortype);
+                    App.LoaderHide();
+                },
+                error: function (objAjaxRequest, strError) {
+                    var respText = objAjaxRequest.responseText;
+                    var messageText = respText;
+                    console.log(messageText);
+                    App.ToastrNotifierError(messageText);
+                    App.LoaderHide();
+                },
+                complete: function () {
+                    App.LoaderHide();
+                }
+            });
+
+            return false;
+        });
+
+    });
+</script>
+}

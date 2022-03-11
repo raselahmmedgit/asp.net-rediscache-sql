@@ -37,6 +37,7 @@ namespace lab.RedisCacheSql
                 services.AddScoped<IEmployeeManager, EmployeeManager>();
 
                 services.AddSingleton<IRedisConnectionFactory, RedisConnectionFactory>();
+                services.AddSingleton<IRedisServiceManager, RedisServiceManager>();
 
                 services.AddScoped<IAppBackgroundService, AppBackgroundService>();
             }

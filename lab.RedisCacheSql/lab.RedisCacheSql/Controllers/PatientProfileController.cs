@@ -52,8 +52,11 @@ namespace lab.RedisCacheSql.Controllers
             }
             catch (Exception ex)
             {
-                return ErrorView(ex);
+                _result = Result.Fail(MessageHelper.UnhandledError);
             }
+
+            DataTablesResponse returnResponse = DataTablesResponse.Create(request, _result.Error);
+            return new DataTablesJsonResult(returnResponse, true);
         }
 
 

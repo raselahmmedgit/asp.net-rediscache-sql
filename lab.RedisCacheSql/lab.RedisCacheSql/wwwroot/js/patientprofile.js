@@ -44,7 +44,7 @@ var PatientProfile = function () {
 
     var loadDataTables = function (dataTableId, iDisplayLength, sAjaxSourceUrl) {
 
-        //$.fn.dataTable.ext.errMode = () => alert('We are facing some problem while processing the current request. Please try again later.');
+        $.fn.dataTable.ext.errMode = () => alert('We are facing some problem while processing the current request. Please try again later.');
 
         dataTablePatientProfile = $('#' + dataTableId).DataTable({
             "bJQueryUI": true,

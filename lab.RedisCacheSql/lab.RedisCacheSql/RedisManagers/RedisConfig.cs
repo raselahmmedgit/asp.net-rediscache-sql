@@ -9,5 +9,7 @@
         public string? InstanceName { get; set; }
         public string? ConnectRetry { get; set; }
         public string? SyncTimeoutInMinutes { get; set; }
+        public string? RedisStartCommand { get; set; }
+        public string? RedisStopCommand { get; set; }
     }
 }

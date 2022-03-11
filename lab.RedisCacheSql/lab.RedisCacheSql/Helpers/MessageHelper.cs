@@ -22,6 +22,7 @@
         public static string RemoveFail = "Couldn't Removed Successfully.";
 
         public static string Success = "Successfully.";
+        public static string Fail = "Failed.";
         public static string Info = "Please contact your system admin.";
         public static string Warning = "Please contact your system admin.";
         public static string Error = "We are facing some problem while processing the current request. Please try again later.";

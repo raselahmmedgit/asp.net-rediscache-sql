@@ -50,9 +50,23 @@ namespace lab.RedisCacheSql.RedisManagers
             return database;
         }
 
+        public bool IsConnected()
+        {
+            return this.Connection().IsConnected;
+        }
+
         public void DeleteAllDatabase()
         {
             this.Server().FlushAllDatabases();
         }
+    }
+
+    public interface IRedisConnectionFactory
+    {
+        ConnectionMultiplexer Connection();
+        IServer Server();
+        IDatabase Database();
+        bool IsConnected();
+        void DeleteAllDatabase();
     }
 }
