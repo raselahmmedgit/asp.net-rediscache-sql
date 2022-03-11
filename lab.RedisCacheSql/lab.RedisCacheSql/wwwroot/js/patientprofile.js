@@ -62,6 +62,7 @@ var PatientProfile = function () {
                 "sInfo": "Page _START_ to _END_ (Total _TOTAL_)",
                 "sInfoEmpty": "Page 0 to 0 (Total 0)",
                 "sInfoFiltered": "",
+                "sEmptyTable": "Data not found.",
                 "sProcessing": "<div class='row'><div class='col-12 dataTables_processing'>Loading...</div></div>"
             },
             "bProcessing": true,
