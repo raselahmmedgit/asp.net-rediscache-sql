@@ -52,7 +52,14 @@ namespace lab.RedisCacheSql.RedisManagers
 
         public bool IsConnected()
         {
-            return this.Connection().IsConnected;
+            try
+            {
+                return this.Connection().IsConnected;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public void DeleteAllDatabase()

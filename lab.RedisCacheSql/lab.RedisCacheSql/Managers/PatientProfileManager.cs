@@ -21,17 +21,19 @@ namespace lab.RedisCacheSql.Managers
         private readonly IMapper _iMapper;
 
         private readonly IRedisConnectionFactory _iRedisConnectionFactory;
-        
+        private readonly IRedisServiceManager _iRedisServiceManager;
 
         public PatientProfileManager(IOptions<AppConfig> appConfig
             , IPatientProfileRepository iPatientProfileRepository
             , IMapper iMapper
-            , IRedisConnectionFactory iRedisConnectionFactory)
+            , IRedisConnectionFactory iRedisConnectionFactory
+            , IRedisServiceManager iRedisServiceManager)
         {
             _appConfig = appConfig.Value;
             _iPatientProfileRepository = iPatientProfileRepository;
             _iMapper = iMapper;
             _iRedisConnectionFactory = iRedisConnectionFactory;
+            _iRedisServiceManager = iRedisServiceManager;
         }
         
         public async Task<PatientProfileViewModel> GetPatientProfileAsync()
@@ -229,23 +231,31 @@ namespace lab.RedisCacheSql.Managers
         {
             try
             {
-                //_iRedisConnectionFactory.DeleteAllDatabase();
-                var redisDataManager = new RedisDataManager<RedisModel>(_iRedisConnectionFactory);
-
-                var redisModel = redisDataManager.Get(_appConfig.PatientProfileRedisKey);
-                if (redisModel != null)
+                bool isConnected = _iRedisConnectionFactory.IsConnected();
+                if (isConnected)
                 {
-                    if (!string.IsNullOrEmpty(redisModel.Key))
-                    {
-                        var redisDatas = JsonConvert.DeserializeObject<IEnumerable<PatientProfile>>(redisModel.Value);
-                        return _iMapper.Map<IEnumerable<PatientProfile>, IEnumerable<PatientProfileViewModel>>(redisDatas.ToList());
-                    }
-                }
+                    //_iRedisConnectionFactory.DeleteAllDatabase();
+                    var redisDataManager = new RedisDataManager<RedisModel>(_iRedisConnectionFactory);
 
-                InsertRedisPatientProfilesAsync();
-                return Enumerable.Empty<PatientProfileViewModel>();
+                    var redisModel = redisDataManager.Get(_appConfig.PatientProfileRedisKey);
+                    if (redisModel != null)
+                    {
+                        if (!string.IsNullOrEmpty(redisModel.Key))
+                        {
+                            var redisDatas = JsonConvert.DeserializeObject<IEnumerable<PatientProfile>>(redisModel.Value);
+                            return _iMapper.Map<IEnumerable<PatientProfile>, IEnumerable<PatientProfileViewModel>>(redisDatas.ToList());
+                        }
+                    }
+
+                    InsertRedisPatientProfilesAsync();
+                    return Enumerable.Empty<PatientProfileViewModel>();
+                }
+                else 
+                { 
+                    return Enumerable.Empty<PatientProfileViewModel>(); 
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -271,12 +281,13 @@ namespace lab.RedisCacheSql.Managers
 
                 });
             }
-            catch (StackExchange.Redis.RedisConnectionException ex)
-            {
-                throw;
-            }
+            //catch (StackExchange.Redis.RedisConnectionException ex)
+            //{
+            //    throw;
+            //}
             catch (Exception ex)
             {
+                bool isStop = _iRedisServiceManager.Stop();
                 throw;
             }
         }
