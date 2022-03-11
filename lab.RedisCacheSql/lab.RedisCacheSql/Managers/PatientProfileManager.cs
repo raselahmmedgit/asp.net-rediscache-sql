@@ -242,7 +242,7 @@ namespace lab.RedisCacheSql.Managers
                     }
                 }
 
-                //InsertRedisPatientProfilesAsync();
+                InsertRedisPatientProfilesAsync();
                 return Enumerable.Empty<PatientProfileViewModel>();
             }
             catch (Exception ex)
